@@ -18,13 +18,31 @@ public class BinTreeTest {
     private final Gson gson = new Gson();
 
     @Test
-    public void test1(){
+    public void testPre(){
+        // 前置排序
         Node root = init();
         root.preOrder(root);
         List<Integer> dataList = root.getDataList();
         System.out.println(gson.toJson(dataList));
+        // 中置排序
+        Node root1 = init();
+        root1.midOrder(root1);
+        List<Integer> dataList1 = root1.getDataList();
+        System.out.println(gson.toJson(dataList1));
+        // 后置排序
+        Node root2 = init();
+        root2.postPositionOrder(root2);
+        List<Integer> dataList2 = root2.getDataList();
+        System.out.println(gson.toJson(dataList2));
     }
 
+    /**
+     *                     a(10)
+     *               b(5)        c(4)
+     *           d(3)               e(11)
+     *              f(7)        g(12)   h(15)
+     * @return
+     */
     private Node init(){
         // 第4层
         Node f = new Node(7,null,null);

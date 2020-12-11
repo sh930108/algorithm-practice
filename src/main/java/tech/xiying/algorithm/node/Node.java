@@ -33,6 +33,10 @@ public class Node {
         this.right = right;
     }
 
+    /**
+     * 前置排序
+     * @param root
+     */
     public void preOrder(Node root){
         if(root != null){
             dataList.add(root.getData());
@@ -44,6 +48,38 @@ public class Node {
                 // 递归右子树
                 preOrder(root.right);
             }
+        }
+    }
+
+    /**
+     * 前置排序
+     * @param root
+     */
+    public void midOrder(Node root){
+        if(root != null){
+            // 递归左子树
+            midOrder(root.left);
+            dataList.add(root.getData());
+            // 递归右子树
+            midOrder(root.right);
+        }
+    }
+
+    /**
+     * 前置排序
+     * @param root
+     */
+    public void postPositionOrder(Node root){
+        if(root != null){
+            if(Objects.nonNull(root.left)){
+                // 递归左子树
+                postPositionOrder(root.left);
+            }
+            if(Objects.nonNull(root.right)){
+                // 递归右子树
+                postPositionOrder(root.right);
+            }
+            dataList.add(root.getData());
         }
     }
 
