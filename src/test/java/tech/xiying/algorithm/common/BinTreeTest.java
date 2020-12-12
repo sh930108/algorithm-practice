@@ -36,16 +36,57 @@ public class BinTreeTest {
         System.out.println(gson.toJson(dataList2));
     }
 
+    @Test
+    public void maxDeepTest(){
+        Node root = init();
+        int maxDeep = root.maxDeep(root);
+        System.out.println(maxDeep);
+    }
+
+    @Test
+    public void minDeepTest(){
+        Node root = init();
+        int minDeep = root.minDeep(root);
+        System.out.println(minDeep);
+    }
+
+    @Test
+    public void sumLeafTest(){
+        Node root = init();
+        root.sumLeaf(root);
+        System.out.println(root.getLeafSum());
+        int i = root.sumLeafMethodII(root);
+        System.out.println(i);
+    }
+
+    @Test
+    public void getLevelSumTest(){
+        Node root = init();
+        root.getLevelSum(root,4,1);
+        System.out.println(root.getLevelSum());
+    }
+
+    @Test
+    public void getAllRoadTest(){
+        Node root = init();
+        root.getAllRoad(root,null);
+        System.out.println(root.getRoadList());
+    }
+
     /**
      *                     a(10)
      *               b(5)        c(4)
      *           d(3)               e(11)
      *              f(7)        g(12)   h(15)
+     *            k(8)
      * @return
      */
     private Node init(){
+        // 第5层
+        Node k = new Node(8,null,null);
+
         // 第4层
-        Node f = new Node(7,null,null);
+        Node f = new Node(7,k,null);
         Node g = new Node(12,null,null);
         Node h = new Node(15,null,null);
         // 第3层

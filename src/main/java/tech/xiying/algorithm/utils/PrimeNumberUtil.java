@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
+ * 质数
+ *
  * @ClassName utils
  * @Description
  * @Author shanghao5
