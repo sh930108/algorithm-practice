@@ -1,4 +1,4 @@
-package tech.xiying.algorithm.node;
+package tech.xiying.algorithm.entity;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,9 @@ public class Node {
     private Node left;
     private Node right;
 
+
+    /*********** 结果集 *************/
+
     private List<Integer> dataList = Lists.newArrayList();
 
     private Integer leafSum=0;
@@ -38,6 +41,12 @@ public class Node {
      * 路径list
      */
     private List<String> roadList = Lists.newArrayList();
+    /**
+     * 宽度
+     */
+    private Integer treeWidth = 0;
+    private Integer tempWidth;
+    /*********** 结果集 *************/
 
     public Node(int data, Node left, Node right) {
         this.data = data;
@@ -208,4 +217,22 @@ public class Node {
         }
     }
 
+    /**
+     * 获取tree 宽度
+     * @param root
+     */
+    public void getTreeWidth(Node root,Integer depth,Integer level){
+        if (root == null) {
+            return;
+        }
+        if(depth < level){
+            getTreeWidth(root.left,depth+1,level);
+            getTreeWidth(root.right,depth+1,level);
+        }
+
+        if(depth.equals(level)){
+            treeWidth += 1;
+        }
+    }
 }
+

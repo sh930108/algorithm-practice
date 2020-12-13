@@ -1,9 +1,8 @@
 package tech.xiying.algorithm.common;
 
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
-import tech.xiying.algorithm.node.Node;
+import tech.xiying.algorithm.entity.Node;
 
 import java.util.List;
 
@@ -71,6 +70,23 @@ public class BinTreeTest {
         Node root = init();
         root.getAllRoad(root,null);
         System.out.println(root.getRoadList());
+    }
+
+    @Test
+    public void getTreeWidthTest(){
+        Node deepNode = init();
+        int maxDeep = deepNode.maxDeep(deepNode);
+
+        Integer maxWidth = 0;
+        for(int i=1;i<=maxDeep;i++){
+            Node root = init();
+            root.getTreeWidth(root, 1, i);
+            if(maxWidth < root.getTreeWidth()){
+                maxWidth = root.getTreeWidth();
+            }
+            System.out.println(root.getTreeWidth());
+        }
+        System.out.println("========"+ maxWidth);
     }
 
     /**
