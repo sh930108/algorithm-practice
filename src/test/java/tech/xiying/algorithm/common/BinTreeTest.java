@@ -116,4 +116,10 @@ public class BinTreeTest {
         return a;
     }
 
+    @Test
+    public void test(){
+        String s= "index";
+        char c = s.charAt(0);
+        System.out.println(c);
+    }
 }
