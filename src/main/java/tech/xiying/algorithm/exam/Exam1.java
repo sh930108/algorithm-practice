@@ -1,15 +1,13 @@
 package tech.xiying.algorithm.exam;
 
-import com.google.common.collect.Lists;
-import org.springframework.util.CollectionUtils;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
  * @ClassName Exam1
  * @Description
- * @Author shanghao5
+ * @Author xiying
  * @Date 2020/12/14 21:22
  **/
 public class Exam1 {
@@ -41,50 +39,57 @@ public class Exam1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int wordCount = scanner.nextInt();
-        List<String> wordList = Lists.newArrayList();
+        List<String> wordList = new ArrayList<>();
         for (int i=0;i<wordCount;i++){
             wordList.add(scanner.next());
         }
 
-        if(!CollectionUtils.isEmpty(wordList)){
-            List<StringBuffer> result = Lists.newArrayList();
+        if(wordList.size() > 0){
+            List<StringBuffer> result = new ArrayList<>();
             wordList.forEach(word -> {
-                StringBuffer wordBuffer = new StringBuffer(word);
-                for(int i= 0;i< word.length();i++){
-                    char a = word.charAt(i);
-                    if((i+1) < word.length()){
-                        char b = word.charAt(i+1);
-                        if(a == b){
-                            if((i+2) < word.length()){
-                                char c = word.charAt(i+2);
-                                if(a == c){
-                                    wordBuffer.deleteCharAt(i);
-                                }else{
-                                    if((i+3) < word.length()){
-                                        char d = word.charAt(i+3);
-                                        if (c == d) {
-                                            wordBuffer.deleteCharAt(i+3);
-                                        }
-                                    }
-
-
-                                }
-                            }
-                        }
-                    }
-                }
+                StringBuffer wordBuffer = getResultBuffer(word);
                 result.add(wordBuffer);
             });
 
             result.forEach(System.out::println);
-
         }
-
-
-
     }
 
+    /**
+     * 1. 每次删除字母后重新进行循环（删除后的String）
+     *
+     * 2. 最多循环 循环word - 2 次
+     *
+     * 将单词去除多余字母
+     * @return
+     */
+    private static StringBuffer getResultBuffer(String word){
+        StringBuffer result = new StringBuffer(word);
+        /**
+         * 最多循环length-2 次
+         */
+        for(int i = 2; i < word.length() ;i++){
+            /**
+             * 若有字符删除，删除字符重新进循环
+             */
+            for(int j = 2; j < result.length(); j++){
+                // AAA 删除 第三个A
+                if(result.charAt(j) ==result.charAt(j-1) && result.charAt(j-1) ==result.charAt(j-2)){
+                    result.deleteCharAt(j);
+                    break;
+                }else{
+                    // AABB 删除当前B
+                    if((j+1) < result.length() && result.charAt(j) == result.charAt(j+1)
+                            && result.charAt(j-1) ==result.charAt(j-2)){
+                        result.deleteCharAt(j);
+                        break;
+                    }
+                }
+            }
+        }
 
+        return result;
+    }
 
 
 }
