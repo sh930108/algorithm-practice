@@ -65,24 +65,32 @@ public class Exam1 {
      */
     private static StringBuffer getResultBuffer(String word){
         StringBuffer result = new StringBuffer(word);
+        Boolean endFlag = false;
         /**
          * 最多循环length-2 次
          */
         for(int i = 2; i < word.length() ;i++){
-            /**
-             * 若有字符删除，删除字符重新进循环
-             */
-            for(int j = 2; j < result.length(); j++){
-                // AAA 删除 第三个A
-                if(result.charAt(j) ==result.charAt(j-1) && result.charAt(j-1) ==result.charAt(j-2)){
-                    result.deleteCharAt(j);
-                    break;
-                }else{
-                    // AABB 删除当前B
-                    if((j+1) < result.length() && result.charAt(j) == result.charAt(j+1)
-                            && result.charAt(j-1) ==result.charAt(j-2)){
+
+            if(!endFlag){
+                /**
+                 * 若有字符删除，删除字符重新进循环
+                 */
+                for(int j = 2; j < result.length(); j++){
+                    // AAA 删除 第三个A
+                    if(result.charAt(j) ==result.charAt(j-1) && result.charAt(j-1) ==result.charAt(j-2)){
                         result.deleteCharAt(j);
                         break;
+                    }else{
+                        // AABB 删除当前B
+                        if((j+1) < result.length() && result.charAt(j) == result.charAt(j+1)
+                                && result.charAt(j-1) ==result.charAt(j-2)){
+                            result.deleteCharAt(j);
+                            break;
+                        }
+                    }
+                    // 全部遍历完毕说明已经不需要在循环
+                    if(j == (result.length()-1)){
+                        endFlag = true;
                     }
                 }
             }
